@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col md:flex-row">
+    <!-- Image de gauche -->
+    <div class="hidden md:block md:w-1/2 bg-cover bg-center" style="background-image: url('{% static "images/login-image.png" %}');">
+    </div>
+
+    <!-- Formulaire de droite -->
+    <div class="w-full md:w-1/2 flex items-center justify-center bg-[#F8FFF8] py-12 px-6">
+        <div class="w-full max-w-md">
+            <h2 class="text-2xl font-bold text-[#1C6758] mb-6 text-center">Modifier la leçon</h2>
+
+            <form method="POST" class="space-y-5">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        {{ field.label }}
+                    </label>
+                    {{ field|add_class:"w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1C6758]/50" }}
+                    {% if field.errors %}
+                    <p class="text-sm text-red-600 mt-1">{{ field.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <div class="flex justify-between items-center mt-6">
+                    <button type="submit" class="w-full py-2 px-4 bg-[#1C6758] hover:bg-[#144f43] text-white font-semibold rounded-md shadow-sm transition">
+                        Confirmer la modification
+                    </button>
+                </div>
+
+                <p class="mt-4 text-center text-sm text-gray-600">
+                    <a href="{% url 'programmes:lessonlistdetail' slug=lesson.slug matiere=lesson.matiere.slug niveau=lesson.niveau.slug %}"
+                       class="text-[#1C6758] hover:underline">
+                        Annuler la modification
+                    </a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

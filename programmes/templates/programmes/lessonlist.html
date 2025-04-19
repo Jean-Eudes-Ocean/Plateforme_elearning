@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-10">
+    <!-- Header -->
+    <div class="text-center mb-10">
+        <h1 class="text-4xl font-bold">Leçons de {{ matieres.nom }}</h1>
+        <p class="text-gray-500 mt-2">Explorez les chapitres disponibles.</p>
+    </div>
+
+    <!-- Si l'utilisateur est connecté -->
+    {% if user.is_authenticated %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for lesson in matieres.lesson.all %}
+            <div class="bg-white shadow rounded-2xl p-6 flex flex-col items-center text-center">
+                <!-- Icône -->
+                <div class="bg-yellow-100 text-yellow-600 rounded-full w-20 h-20 flex items-center justify-center mb-4">
+                    <i class="fas fa-file-alt fa-2x"></i>
+                </div>
+
+                <!-- Contenu -->
+                <h3 class="text-lg font-semibold mb-2">Chapitre {{ lesson.position }}</h3>
+                <p class="text-gray-500 mb-4">{{ lesson.nom }}</p>
+
+                <!-- Bouton -->
+                <a href="{% url 'programmes:lessonlistdetail' slug=lesson.slug matiere=matieres.slug niveau=matieres.niveau.slug %}" class="mt-auto inline-block bg-yellow-500 text-white px-6 py-2 rounded-full hover:bg-yellow-600 transition">
+                    Lire la leçon <i class="fas fa-book-reader ml-2"></i>
+                </a>
+            </div>
+            {% empty %}
+            <div class="col-span-full text-center text-blue-500">
+                Aucune leçon disponible pour cette matière.
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="bg-yellow-100 text-yellow-700 p-6 text-center rounded-lg">
+            Pour suivre un cours, vous devez être connecté.
+            <a href="{% url 'login' %}" class="inline-block bg-blue-600 text-white px-4 py-2 mt-4 rounded-full hover:bg-blue-700 transition">
+                Connexion
+            </a>
+        </div>
+    {% endif %}
+
+    <!-- Bouton d'ajout pour admin -->
+    {% if user.is_superuser %}
+    <div class="text-center mt-10">
+        <a href="{% url 'programmes:lessoncreate' niveau=matieres.niveau.slug slug=matieres.slug %}" class="inline-block border border-green-600 text-green-600 px-6 py-2 rounded-full hover:bg-green-600 hover:text-white transition">
+            <i class="fas fa-plus mr-2"></i>Créer une nouvelle leçon
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

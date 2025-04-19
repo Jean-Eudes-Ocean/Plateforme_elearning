@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-10">
+    <!-- Header -->
+    <div class="text-center mb-10">
+        <h1 class="text-4xl font-bold">Matières du {{ niveau.nom }}</h1>
+        <p class="text-gray-500 mt-2">Choisissez une matière pour accéder aux leçons.</p>
+    </div>
+
+    <!-- Matières Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for matiere in niveau.matiere.all %}
+        <div class="bg-white shadow rounded-2xl p-6 flex flex-col items-center text-center min-h-[400px]">
+            <!-- Image ou Icône -->
+            {% if matiere.image %}
+            <img src="{{ matiere.image.url }}" alt="{{ matiere.nom }}" class="h-32 w-32 object-cover rounded-full mb-4">
+            {% else %}
+                <div class="w-32 h-32 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-book fa-2x text-green-600"></i>
+                </div>
+            {% endif %}
+            
+            <!-- Contenu -->
+            <div class="p-6 flex flex-col items-center text-center flex-grow">
+                <h3 class="text-lg font-semibold mb-2">{{ matiere.nom }}</h3>
+                <p class="text-gray-500 mb-4">{{ matiere.description|truncatewords:20 }}</p>
+            </div>
+
+            <!-- Bouton -->
+            <div class="p-4 border-t text-center">
+                <a href="{% url 'programmes:lessonlist' slug=matiere.slug niveau=niveau.slug %}" class="mt-auto inline-block bg-yellow-500 text-white px-6 py-2 rounded-full hover:bg-yellow-600 transition">
+                    Voir les leçons <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-center text-blue-500">
+            Aucune matière disponible pour ce niveau.
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

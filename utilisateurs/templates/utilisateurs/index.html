@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil | KAORENGO{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="bg-green-600 text-white p-10 flex flex-col md:flex-row items-center justify-between">
+  <div class="md:w-1/2">
+    <h1 class="text-3xl font-bold mb-4 leading-tight">
+      Accédez à la Connaissance, Même Sans Connexion<br />
+      Avec notre Bibliothèque Numérique Interactive
+    </h1>
+    <p class="mb-6">Une plateforme gratuite pensée pour les étudiants et enseignants du Burkina Faso.</p>
+    <div class="space-x-4">
+      <button class="bg-yellow-400 px-4 py-2 rounded text-black font-semibold">Explorer la Bibliothèque</button>
+      <a href="#" class="underline">Voir comment ça marche →</a>
+    </div>
+  </div>
+  <div class="mt-6 md:mt-0 md:w-1/2 flex justify-center">
+    <img src="https://cdn-icons-png.flaticon.com/512/3437/3437367.png" alt="Bibliothèque" class="w-64" />
+  </div>
+</section>
+
+<!-- Avantages -->
+<section class="p-10 bg-gray-100 text-center">
+  <h2 class="text-2xl font-bold mb-10">Rejoignez la plateforme d’apprentissage pour découvrir</h2>
+  <div class="grid md:grid-cols-3 gap-6">
+  
+    <div class="bg-white p-6 rounded shadow">
+      <h3 class="font-bold text-green-600 mb-2">Cours Gratuits</h3>
+      <p>Beberapa kursus gratis pour soutenir les communautés défavorisées.</p>
+    </div>
+    <div class="bg-white p-6 rounded shadow">
+      <h3 class="font-bold text-green-600 mb-2">Accès Illimité</h3>
+      <p>Apprenez à votre rythme, sans limite de temps.</p>
+    </div>
+    <div class="bg-white p-6 rounded shadow">
+      <h3 class="font-bold text-green-600 mb-2">Groupes d’Échange</h3>
+      <p>Posez des questions et participez à des discussions pédagogiques.</p>
+    </div>
+    <div class="bg-white p-6 rounded shadow">
+      <h3 class="font-bold text-green-600 mb-2">Certificats</h3>
+      <p>Obtenez un certificat à la fin de chaque cours.</p>
+    </div>
+    <div class="bg-white p-6 rounded shadow">
+      <h3 class="font-bold text-green-600 mb-2">Apprentissage Structuré</h3>
+      <p>Des parcours adaptés du débutant à l’expert.</p>
+    </div>
+    <div class="bg-white p-6 rounded shadow">
+      <h3 class="font-bold text-green-600 mb-2">Formateurs Expérimentés</h3>
+      <p>Des instructeurs issus de l’industrie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section Connexion ou Inscription -->
+<section class="bg-green-700 text-white p-10 flex flex-col md:flex-row justify-between items-center">
+  <div class="md:w-1/2 mb-6 md:mb-0">
+    <h2 class="text-2xl font-bold mb-4">Prenez une longueur d’avance vers votre avenir</h2>
+    <p>Rejoignez notre communauté pour accéder gratuitement à des milliers de ressources éducatives.</p>
+  </div>
+  <div class="md:w-1/2 bg-white text-black p-6 rounded shadow space-y-4">
+    <div class="flex flex-col md:flex-row justify-around gap-4">
+      <a href="{% url 'login' %}" class="w-full md:w-1/2 bg-green-600 text-white text-center py-3 rounded hover:bg-green-500 transition">Se connecter</a>
+      <a href="{% url 'register' %}" class="w-full md:w-1/2 bg-yellow-400 text-black text-center py-3 rounded hover:bg-yellow-300 transition">S’inscrire</a>
+    </div>
+    <p class="text-center text-sm mt-4">En vous inscrivant, vous acceptez nos <a href="#" class="underline">Conditions d’utilisation</a>.</p>
+  </div>
+</section>
+
+
+{% endblock %}

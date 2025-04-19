@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col md:flex-row">
+    <!-- Image de gauche -->
+    <div class="hidden md:block md:w-1/2 bg-cover bg-center" style="background-image: url('{% static "images/login-image.png" %}');">
+    </div>
+
+    <!-- Formulaire de droite -->
+    <div class="w-full md:w-1/2 flex items-center justify-center bg-[#F8FFF8] py-12 px-6">
+        <div class="w-full max-w-md bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+            <h2 class="text-2xl font-bold text-[#1C6758] mb-2">Créer un nouvel élément</h2>
+            <p class="text-sm text-gray-500 mb-6">Veuillez remplir le formulaire ci-dessous pour continuer.</p>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="bg-{{ message.tags }}-100 border border-{{ message.tags }}-300 text-{{ message.tags }}-700 px-4 py-2 rounded mb-4">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" class="space-y-5">
+                {% csrf_token %}
+                {{ form|crispy }}
+
+                <button type="submit"
+                    class="w-full py-3 px-4 bg-[#1C6758] hover:bg-[#144f43] text-white font-semibold rounded-md shadow-sm transition duration-150">
+                    Confirmer la création
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

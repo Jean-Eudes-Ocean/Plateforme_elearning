@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full bg-white p-8 rounded-xl shadow border border-gray-200">
+        <div class="text-center">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Suppression de la leçon</h2>
+            <p class="text-gray-600">Êtes-vous sûr de vouloir supprimer cette leçon ? Cette action est irréversible.</p>
+        </div>
+
+        <form method="POST" class="mt-6 space-y-4">
+            {% csrf_token %}
+            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 transition duration-150">
+                Supprimer définitivement
+            </button>
+            <a href="{% url 'programmes:lessonlistdetail' slug=lesson.slug matiere=lesson.matiere.slug niveau=lesson.niveau.slug %}"
+               class="w-full inline-block text-center py-3 px-4 rounded-md text-sm font-medium text-[#1C6758] border border-[#1C6758] hover:bg-[#1C6758]/10 transition duration-150">
+                Annuler la suppression
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}
